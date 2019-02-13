@@ -19,8 +19,8 @@ public class ManagementSystem {
     private ManagementSystem() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/students";
-            con = DriverManager.getConnection(url, "root", "casperonza_83");
+            String url = "jdbc:mysql://localhost:3306/some DB";
+            con = DriverManager.getConnection(url, "*", "*");
         } catch (ClassNotFoundException e) {
             throw new Exception(e);
         } catch (SQLException e) {
