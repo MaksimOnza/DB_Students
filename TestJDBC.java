@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class TestJDBC {
 
     public static void main(String args[]) {
-        // Снова используем файл для вывода из-за кодировки
+        // Используем файл для вывода из-за кодировки
         try {
             System.setOut(new PrintStream("out.txt"));
         } catch (FileNotFoundException ex) {
@@ -36,9 +36,7 @@ public class TestJDBC {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Эта часть позволяет нам закрыть все открытые ресуры
-            // В противном случае возмжожны проблемы. Поэтому будьте
-            // всегда аккуратны при работе с коннектами
+            // Эта часть позволяет закрыть все открытые ресуры
             try {
                 if (rs != null) {
                     rs.close();
