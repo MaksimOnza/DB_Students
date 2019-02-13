@@ -8,16 +8,15 @@ import javax.swing.table.AbstractTableModel;
 import students.logic.Student;
 
 public class StudentTableModel extends AbstractTableModel {
-    // Сделаем хранилище для нашего списка студентов
 
     private Vector students;
 
-    // Модель при создании получает список студентов
+    // РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚РѕРІ
     public StudentTableModel(Vector students) {
         this.students = students;
     }
 
-    // Количество строк равно числу записей
+    
     public int getRowCount() {
         if (students != null) {
             return students.size();
@@ -25,23 +24,21 @@ public class StudentTableModel extends AbstractTableModel {
         return 0;
     }
 
-    // Количество столбцов - 4. Фамилия, Имя, Отчество, Дата рождения
+   
     public int getColumnCount() {
         return 4;
     }
 
-    // Вернем наименование колонки
+    
     public String getColumnName(int column) {
-        String[] colNames = {"Фамилия", "Имя", "Отчество", "Дата"};
+        String[] colNames = {"Г”Г Г¬ГЁГ«ГЁГї", "Г€Г¬Гї", "ГЋГІГ·ГҐГ±ГІГўГ®", "Г„Г ГІГ "};
         return colNames[column];
     }
 
-    // Возвращаем данные для определенной строки и столбца
+    // Р’РѕР·РІСЂР°С‰Р°РµРј РґР°РЅРЅС‹Рµ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ СЃС‚СЂРѕРєРё Рё СЃС‚РѕР»Р±С†Р°
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (students != null) {
-            // Получаем из вектора студента
             Student st = (Student) students.get(rowIndex);
-            // В зависимости от колонки возвращаем имя, фамилия и т.д.
             switch (columnIndex) {
                 case 0:
                     return st.getSurName();
@@ -57,8 +54,7 @@ public class StudentTableModel extends AbstractTableModel {
         return null;
     }
 
-    // Добавим метод, который возвращает студента по номеру строки
-    // Это нам пригодится чуть позже
+    // РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СѓРґРµРЅС‚Р° РїРѕ РЅРѕРјРµСЂСѓ СЃС‚СЂРѕРєРё
     public Student getStudent(int rowIndex) {
         if (students != null) {
             if (rowIndex < students.size() && rowIndex >= 0) {
