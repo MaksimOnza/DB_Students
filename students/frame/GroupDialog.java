@@ -21,8 +21,8 @@ import students.logic.Group;
 
 public class GroupDialog extends JDialog implements ActionListener {
 
-    private static final int D_HEIGHT = 150;   // высота
-    private final static int D_WIDTH = 200;   // ширина
+    private static final int D_HEIGHT = 150;   
+    private final static int D_WIDTH = 200;   
     private JSpinner spYear;
     private JComboBox groupList;
     private JButton btnOk = new JButton("OK");
@@ -30,103 +30,75 @@ public class GroupDialog extends JDialog implements ActionListener {
     private boolean result = false;
 
     public GroupDialog(int year, List<Group> groups) {
-        // Установить заголовок
-        setTitle("Перенос группы");
-
-        // Создаем сложный layout для нашего окна
+        setTitle("РџРµСЂРµРЅРѕСЃ РіСЂСѓРїРїС‹");
+        
+        // РЎРѕР·РґР°РµРј Layout РґР»СЏ РѕРєРЅР°
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
-        // Создаем переменную для установки правил размещения
         GridBagConstraints c = new GridBagConstraints();
-        // Сразу задаем отступ от границ для каждого элемента
         c.insets = new Insets(5, 5, 5, 5);
-
-        // Первый элемент - заголовок для поля выбора групп
-        JLabel l = new JLabel("Новая группа:");
-        // После него можно будет еще помещать компоненты
+        
+        //РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚
+        JLabel l = new JLabel("РќРѕРІР°СЏ РіСЂСѓРїРїР°:");
         c.gridwidth = GridBagConstraints.RELATIVE;
-        // Не заполняем все пространство, отведенное компоненту
         c.fill = GridBagConstraints.NONE;
-        // "Привязываем" компонент к правому краю
         c.anchor = GridBagConstraints.EAST;
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(l, c);
-        // Добавляем компонент
         getContentPane().add(l);
 
-        // Второй элемент - список групп
+        // Р’С‚РѕСЂРѕР№ СЌР»РµРјРµРЅС‚
         groupList = new JComboBox(new Vector<Group>(groups));
-        // Элемент занимает всю оставшуюся ширину
         c.gridwidth = GridBagConstraints.REMAINDER;
-        // Растягиваем компонент по всему пространству для него
         c.fill = GridBagConstraints.BOTH;
-        // "Привязываем" его к левой части
         c.anchor = GridBagConstraints.WEST;
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(groupList, c);
-        // Добавляем компонент
         getContentPane().add(groupList);
 
-        // Третий элемент - заголовок для поля выбора года
-        l = new JLabel("Новый год:");
-        // После него можно будет еще помещать компоненты
+        // РўСЂРµС‚РёР№ СЌР»РµРјРµРЅС‚
+        l = new JLabel("РќРѕРІС‹Р№ РіРѕРґ:");
         c.gridwidth = GridBagConstraints.RELATIVE;
-        // Не заполняем все пространство, отведенное компоненту
         c.fill = GridBagConstraints.NONE;
-        // "Привязываем" компонент к правому краю
         c.anchor = GridBagConstraints.EAST;
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(l, c);
-        // Добавляем компонент
         getContentPane().add(l);
 
-        // Сразу увеличиваем группу на один год - для перевода
+        // РЎСЂР°Р·Сѓ СѓРІРµР»РёС‡РёРІР°РµРј РіСЂСѓРїРїСѓ РЅР° РѕРґРёРЅ РіРѕРґ - РґР»СЏ РїРµСЂРµРІРѕРґР°
         spYear = new JSpinner(new SpinnerNumberModel(year + 1, 1900, 2100, 1));
-        // Элемент занимает всю оставшуюся ширину
         c.gridwidth = GridBagConstraints.REMAINDER;
-        // Растягиваем компонент по всему пространству для него
         c.fill = GridBagConstraints.BOTH;
-        // "Привязываем" его к левой части
         c.anchor = GridBagConstraints.WEST;
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(spYear, c);
-        // Добавляем компонент
         getContentPane().add(spYear);
 
+        //Р Р°Р±РѕС‚Р° РєРЅРѕРїРєРё OK
         c.gridwidth = GridBagConstraints.RELATIVE;
         c.fill = GridBagConstraints.BOTH;
         btnOk.setName("OK");
-        // Добавляем листенер для кнопки
         btnOk.addActionListener(this);
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(btnOk, c);
-        // Добавляем компонент
         getContentPane().add(btnOk);
-
+        
+        // Р Р°Р±РѕС‚Р° РєРЅРѕРїРєРё Cancel
         btnCancel.setName("Cancel");
-        // Добавляем листенер для кнопки
         btnCancel.addActionListener(this);
-        // Устанавливаем это правило для нашего компонета
         gbl.setConstraints(btnCancel, c);
-        // Добавляем компонент
         getContentPane().add(btnCancel);
 
-        // Устанавливаем поведение формы при закрытии - не закрывать совсем.
+        // РџРѕРІРµРґРµРЅРёРµ С„РѕСЂРјС‹ РїСЂРё Р·Р°РєСЂС‹С‚РёРё - РЅРµ Р·Р°РєСЂС‹РІР°С‚СЊ СЃРѕРІСЃРµРј.
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-        // Получаем размеры экрана
+        // РџРѕР»СѓС‡Р°РµРј СЂР°Р·РјРµСЂС‹ СЌРєСЂР°РЅР° Рё РІС‹С‡РёСЃР»СЏСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР° РѕСЃРЅРѕРІРµ РїРѕР»СѓС‡РµРЅРЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РїРѕРјРµС‰Р°РµРј РµРіРѕ РїРѕ С†РµРЅС‚СЂСѓ.
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        // А теперь просто помещаем его по центру, вычисляя координаты на основе полученной информации
         setBounds(((int) d.getWidth() - GroupDialog.D_WIDTH) / 2, ((int) d.getHeight() - GroupDialog.D_HEIGHT) / 2,
                 GroupDialog.D_WIDTH, GroupDialog.D_HEIGHT);
     }
 
-    // Возврат года, который установлен на форме
+    // Р’РѕР·РІСЂР°С‚ РіРѕРґР°, РєРѕС‚РѕСЂС‹Р№ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РЅР° С„РѕСЂРјРµ
     public int getYear() {
         return ((SpinnerNumberModel) spYear.getModel()).getNumber().intValue();
     }
 
-    // Возврат группы, которая установлена на форме
+    // Р’РѕР·РІСЂР°С‚ РіСЂСѓРїРїС‹, РєРѕС‚РѕСЂР°СЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅР° РЅР° С„РѕСЂРјРµ
     public Group getGroup() {
         if (groupList.getModel().getSize() > 0) {
             return (Group) groupList.getSelectedItem();
@@ -134,12 +106,12 @@ public class GroupDialog extends JDialog implements ActionListener {
         return null;
     }
 
-    // Получить результат, true - кнопка ОК, false - кнопка Cancel
+    // РџРѕР»СѓС‡РёС‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚, true - РєРЅРѕРїРєР° РћРљ, false - РєРЅРѕРїРєР° Cancel
     public boolean getResult() {
         return result;
     }
 
-    // Обработка нжатия кнопок
+    // РћР±СЂР°Р±РѕС‚РєР° РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРѕРє
     public void actionPerformed(ActionEvent e) {
         JButton src = (JButton) e.getSource();
         if (src.getName().equals("OK")) {
