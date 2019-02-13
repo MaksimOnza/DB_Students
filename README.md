@@ -1,2 +1,2 @@
 # DB_Students
-Simple example how working with DB.
+Simple example how working JDBC and Servlets.
