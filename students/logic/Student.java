@@ -97,7 +97,7 @@ public class Student implements Comparable {
     }
 
     public String toString() {
-        return surName + " " + firstName + " " + patronymic + ", " + DateFormat.getDateInstance(DateFormat.SHORT).format(dateOfBirth) + ", √ÛÔÔ‡ »ƒ=" + groupId + " √Ó‰:" + educationYear;
+        return surName + " " + firstName + " " + patronymic + ", " + DateFormat.getDateInstance(DateFormat.SHORT).format(dateOfBirth) + ", –ì—Ä—É–ø–ø–∞ –ò–î=" + groupId + " –ì–æ–¥:" + educationYear;
     }
 
     public int compareTo(Object obj) {
