@@ -35,11 +35,10 @@ public class StudentDialog extends JDialog implements ActionListener {
     private final static int L_X = 10;      // левая граница метки для поля
     private final static int L_W = 100;     // ширина метки для поля
     private final static int C_W = 150;     // ширина поля
-    // Владелец нашего окна - вводим для вызова нужного нам метода
+        
     private StudentsFrame owner;
-    // Результат нажатия кнопок
     private boolean result = false;
-    // Параметры студента
+    
     private int studentId = 0;
     private JTextField firstName = new JTextField();
     private JTextField surName = new JTextField();
@@ -51,10 +50,7 @@ public class StudentDialog extends JDialog implements ActionListener {
 
     // Второй параметр содержит знак - добавление студента или исправление
     public StudentDialog(List<Group> groups, boolean newStudent, StudentsFrame owner) {
-        // После вставки студента без закрытия окна нам потребуется перегрузка списка
-        // А для этого нам надо иметь доступ к этому методу в главной форме
         this.owner = owner;
-        // Установить заголовок
         setTitle("Редактирование данных студента");
         getContentPane().setLayout(new FlowLayout());
 
@@ -62,58 +58,53 @@ public class StudentDialog extends JDialog implements ActionListener {
 
         JRadioButton m = new JRadioButton("Муж");
         JRadioButton w = new JRadioButton("Жен");
-        // Сделаем имя такое же, как требуется в баще данных - М/Ж
         m.setActionCommand("М");
         w.setActionCommand("Ж");
-        // Добавим радио-кнопки в группу
         sex.add(m);
         sex.add(w);
 
-        // Не будем использовать layout совсем
         getContentPane().setLayout(null);
 
-        // Разместим компоненты по абсолютным координатам
-        // Фамилия
         JLabel l = new JLabel("Фамилия:", JLabel.RIGHT);
         l.setBounds(L_X, 10, L_W, 20);
         getContentPane().add(l);
         surName.setBounds(L_X + L_W + 10, 10, C_W, 20);
         getContentPane().add(surName);
-        // Имя
+   
         l = new JLabel("Имя:", JLabel.RIGHT);
         l.setBounds(L_X, 30, L_W, 20);
         getContentPane().add(l);
         firstName.setBounds(L_X + L_W + 10, 30, C_W, 20);
         getContentPane().add(firstName);
-        // Отчество
+     
         l = new JLabel("Отчество:", JLabel.RIGHT);
         l.setBounds(L_X, 50, L_W, 20);
         getContentPane().add(l);
         patronymic.setBounds(L_X + L_W + 10, 50, C_W, 20);
         getContentPane().add(patronymic);
-        // Пол
+       
         l = new JLabel("Пол:", JLabel.RIGHT);
         l.setBounds(L_X, 70, L_W, 20);
         getContentPane().add(l);
         m.setBounds(L_X + L_W + 10, 70, C_W / 2, 20);
         getContentPane().add(m);
-        // Сделаем по умолчанию женщину - из уважения
+        // Сделаем по умолчанию женщину 
         w.setBounds(L_X + L_W + 10 + C_W / 2, 70, C_W / 2, 20);
         w.setSelected(true);
         getContentPane().add(w);
-        // Дата рождения
+      
         l = new JLabel("Дата рождения:", JLabel.RIGHT);
         l.setBounds(L_X, 90, L_W, 20);
         getContentPane().add(l);
         dateOfBirth.setBounds(L_X + L_W + 10, 90, C_W, 20);
         getContentPane().add(dateOfBirth);
-        // Группа
+     
         l = new JLabel("Группа:", JLabel.RIGHT);
         l.setBounds(L_X, 115, L_W, 25);
         getContentPane().add(l);
         groupList.setBounds(L_X + L_W + 10, 115, C_W, 25);
         getContentPane().add(groupList);
-        // Год обучения
+      
         l = new JLabel("Год обучения:", JLabel.RIGHT);
         l.setBounds(L_X, 145, L_W, 20);
         getContentPane().add(l);
@@ -140,12 +131,10 @@ public class StudentDialog extends JDialog implements ActionListener {
             getContentPane().add(btnNew);
         }
 
-        // Устанавливаем поведение формы при закрытии - не закрывать совсем.
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-        // Получаем размеры экрана
+        // Получаем размеры экрана и вычисляя координаты на основе полученной информации помещаем его по центру.
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        // А теперь просто помещаем его по центру, вычисляя координаты на основе полученной информации
         setBounds(((int) d.getWidth() - StudentDialog.D_WIDTH) / 2, ((int) d.getHeight() - StudentDialog.D_HEIGHT) / 2,
                 StudentDialog.D_WIDTH, StudentDialog.D_HEIGHT);
     }
@@ -192,16 +181,12 @@ public class StudentDialog extends JDialog implements ActionListener {
         return st;
     }
 
-    // Получить результат, true - кнопка ОК, false - кнопка Cancel
     public boolean getResult() {
         return result;
     }
 
     public void actionPerformed(ActionEvent e) {
         JButton src = (JButton) e.getSource();
-        // Добавляем студента, но не закрываем окно
-        // Здесь мы не будем вызывать в отдельном потоке сохранение.
-        // Оно не занимаем много времени и лишние действия здесь не оправданы
         if (src.getName().equals("New")) {
             result = true;
             try {
